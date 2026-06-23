@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: basic-netapp-iscsi-argo
+provisioner: csi.trident.netapp.io
+parameters:
+  storagePools: "netapp-iscsi-backend:.*"
+  fsType: "ext4"
+  backendType: "ontap-san"
+mountOptions:
+  - discard
+allowVolumeExpansion: true
