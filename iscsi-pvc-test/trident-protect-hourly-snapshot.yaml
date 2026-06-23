@@ -1,0 +1,25 @@
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: demo-full-protection
+  namespace: demo
+spec:
+  includedNamespaces:
+    - namespace: demo
+
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  name: hourly-namespace-snapshot
+  namespace: demo
+spec:
+  applicationRef: demo-full-protection
+  appVaultRef: source2
+  enabled: true
+  granularity: Hourly
+  minute: "0"
+  snapshotRetention: "24"
+  backupRetention: "0"
+  snapshotReclaimPolicy: Delete
+  backupReclaimPolicy: Retain
